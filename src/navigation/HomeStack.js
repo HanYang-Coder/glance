@@ -5,9 +5,9 @@ import LoginScreen from '../screens/LoginScreen';
 import SignupScreen from '../screens/SignupScreen';
 import HomeScreen from '../screens/HomeScreen';
 import ListingsScreen from '../screens/ListingsScreen';
-import AddRoomScreen from '../screens/AddRoomScreen';
+import AddJobScreen from '../screens/AddJobScreen';
 import { IconButton } from 'react-native-paper';
-import RoomScreen from '../screens/RoomScreen';
+import ListingsDetailScreen from '../screens/ListingsDetailScreen';
 import { AuthContext } from './AuthProvider'
 
 const ChatAppStack = createStackNavigator();
@@ -27,20 +27,20 @@ function ChatApp() {
                 }
             }}
         >
+            {/* <ChatAppStack.Screen
+                name="Listings"
+                component={ListingsScreen}
+            /> */}
             <ChatAppStack.Screen
                 name="Listings"
                 component={ListingsScreen}
-            />
-            {/* <ChatAppStack.Screen
-                name="Home"
-                component={HomeScreen}
                 options={({ navigation }) => ({
                     headerRight: () => (
                         <IconButton
                             icon="message-plus"
                             size={28}
                             color="#ffffff"
-                            onPress={() => navigation.navigate('AddRoom')}
+                            onPress={() => navigation.navigate('AddJob')}
                         />
                     ),
                     headerLeft: () => (
@@ -52,7 +52,14 @@ function ChatApp() {
                         />
                     )
                 })}
-            /> */}
+            />
+            <ChatAppStack.Screen
+                name="Details"
+                component={ListingsDetailScreen}
+                options={({ route }) => ({
+                    title: route.params.thread.name
+                })}
+            />
 
         </ChatAppStack.Navigator>
     );
@@ -62,7 +69,7 @@ export default function HomeStack() {
     return (
         <ModalStack.Navigator mode="modal" headerMode="none">
             <ModalStack.Screen name="ChatApp" component={ChatApp} />
-            <ModalStack.Screen name="AddRoom" component={AddRoomScreen} />
+            <ModalStack.Screen name="AddJob" component={AddJobScreen} />
         </ModalStack.Navigator>
     );
 }

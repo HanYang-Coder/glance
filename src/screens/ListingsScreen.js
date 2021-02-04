@@ -12,7 +12,7 @@ import Screen from "../components/Screen";
 import AppText from "../components/Text";
 //import useApi from "../hooks/useApi";
 
-function ListingsScreen({ userId }) {
+function ListingsScreen({ navigation }) {
 
     const [jobs, setThreads] = useState([])
     const [loading, setLoading] = useState(true)
@@ -20,7 +20,7 @@ function ListingsScreen({ userId }) {
     useEffect(() => {
         const unsubscribe = firestore()
             .collection('jobs')
-            .orderBy('createdAt', 'desc')
+            .orderBy('createdAt', 'asc')
             .onSnapshot(querySnapshot => {
                 const jobs = querySnapshot.docs.map(documentSnapshot => {
                     return {
@@ -56,7 +56,7 @@ function ListingsScreen({ userId }) {
                 data={jobs}
                 keyExtractor={item => item._id}
                 renderItem={({ item }) => (
-                    <TouchableOpacity onPress={() => alert('Open a job listing')}>
+                    <TouchableOpacity onPress={() => navigation.navigate('Details', { thread: item })}>
                         <View style={styles.row}>
                             <View style={styles.content}>
                                 <View style={styles.header}>
@@ -66,12 +66,11 @@ function ListingsScreen({ userId }) {
                                     {item.title}${item.price}
                                 </Text>
 
-                                <Image source={{ uri: item.picture }} style={{ width: 200, height: 100 }} />
+                                <Image source={{ uri: item.picture }} style={{ width: 250, height: 100 }} />
                             </View>
                         </View>
                     </TouchableOpacity>
                 )}
-                ItemSeparatorComponent={() => <Separator />}
             />
         </View>
 
