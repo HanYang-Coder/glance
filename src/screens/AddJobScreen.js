@@ -24,18 +24,16 @@ export default function AddRoomScreen({ navigation }) {
                     title: title,
                     price: price,
                     time: time,
-                    category: category,
+                    createdAt: new Date().getTime(),
+                    //createdBy: createdBy,
+
+                    cat: category,
                     description: description,
                     aftersale: aftersale
+                })
+                .then(() => {
+                    navigation.navigate('Listings');
                 });
-            // .then(docRef => {
-            //     docRef.collection('MESSAGES').add({
-            //         text: `You have started a conversation with ${roomName}.`,
-            //         createdAt: new Date().getTime(),
-            //         system: true
-            //     });
-            //     navigation.navigate('Home');
-            // });
         }
     }
 

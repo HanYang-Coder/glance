@@ -20,7 +20,7 @@ function ListingsScreen({ navigation }) {
     useEffect(() => {
         const unsubscribe = firestore()
             .collection('jobs')
-            .orderBy('createdAt', 'asc')
+            .orderBy('createdAt', 'desc')
             .onSnapshot(querySnapshot => {
                 const jobs = querySnapshot.docs.map(documentSnapshot => {
                     return {
@@ -50,8 +50,6 @@ function ListingsScreen({ navigation }) {
 
     return (
         <View style={styles.container}>
-
-
             <FlatList
                 data={jobs}
                 keyExtractor={item => item._id}

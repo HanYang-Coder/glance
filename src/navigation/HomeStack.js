@@ -3,7 +3,7 @@ import { Alert } from 'react-native'
 import { createStackNavigator } from '@react-navigation/stack';
 import LoginScreen from '../screens/LoginScreen';
 import SignupScreen from '../screens/SignupScreen';
-import HomeScreen from '../screens/HomeScreen';
+import ProfileScreen from '../screens/ProfileScreen';
 import ListingsScreen from '../screens/ListingsScreen';
 import AddJobScreen from '../screens/AddJobScreen';
 import { IconButton } from 'react-native-paper';
