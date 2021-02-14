@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Title, IconButton } from 'react-native-paper';
 import FormInput from '../components/FormInput';
@@ -16,72 +16,21 @@ export default function SignupScreen({ navigation }) {
 
     const { register } = useContext(AuthContext);
 
-
-    const { user } = route.params;
-
-    async function handleSend(messages) {
-        const text = messages[0].text;
-
-        firestore()
-            .collection('USERS')
-            .doc(user._id)
-            .collection('MESSAGES')
-            .add({
-                text,
-                createdAt: new Date().getTime(),
-                user: {
-                    _id: currentUser.uid,
-                    email: currentUser.email
-                }
-            });
-
-        await firestore()
-            .collection('THREADS')
-            .doc(thread._id)
-            .set(
-                {
-                    latestMessage: {
-                        text,
-                        createdAt: new Date().getTime()
-                    }
-                },
-                { merge: true }
-            );
+    function handleButtonPress() {
+        if (email.length > 0) {
+            firestore()
+                .collection('users')
+                .add({
+                    about: about,
+                    email: email,
+                    phone: phone,
+                    username: username,
+                })
+            // .then(() => {
+            //     navigation.navigate('Listings');
+            // });
+        }
     }
-
-    useEffect(() => {
-        const messagesListener = firestore()
-            .collection('THREADS')
-            .doc(thread._id)
-            .collection('MESSAGES')
-            .orderBy('createdAt', 'desc')
-            .onSnapshot(querySnapshot => {
-                const messages = querySnapshot.docs.map(doc => {
-                    const firebaseData = doc.data();
-
-                    const data = {
-                        _id: doc.id,
-                        text: '',
-                        createdAt: new Date().getTime(),
-                        ...firebaseData
-                    };
-
-                    if (!firebaseData.system) {
-                        data.user = {
-                            ...firebaseData.user,
-                            name: firebaseData.user.email
-                        };
-                    }
-
-                    return data;
-                });
-
-                setMessages(messages);
-            });
-
-        // Stop listening for updates whenever the component unmounts
-        return () => messagesListener();
-    }, []);
 
     return (
         <View style={styles.container}>
@@ -105,6 +54,12 @@ export default function SignupScreen({ navigation }) {
                 onChangeText={userPhone => setPhone(userPhone)}
             />
             <FormInput
+                labelName='About'
+                value={about}
+                autoCapitalize='none'
+                onChangeText={userAbout => setAbout(userAbout)}
+            />
+            <FormInput
                 labelName='Password'
                 value={password}
                 secureTextEntry={true}
@@ -114,7 +69,7 @@ export default function SignupScreen({ navigation }) {
                 title='Signup'
                 modeValue='contained'
                 labelStyle={styles.loginButtonLabel}
-                onPress={() => register(email, password)}
+                onPress={() => register(email, password) & handleButtonPress()}
             />
             <IconButton
                 icon='keyboard-backspace'

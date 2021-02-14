@@ -11,47 +11,9 @@ export default function HomeScreen({ navigation }) {
     const [threads, setThreads] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    /**
-     * Fetch threads from Firestore
-     */
-    // useEffect(() => {
-    //     const unsubscribe = firestore()
-    //         .collection('users')
-    //         .orderBy('latestMessage.createdAt', 'desc')
-    //         .onSnapshot(querySnapshot => {
-    //             const threads = querySnapshot.docs.map(documentSnapshot => {
-    //                 return {
-    //                     _id: documentSnapshot.id,
-    //                     // give defaults
-    //                     name: '',
-
-    //                     latestMessage: {
-    //                         text: ''
-    //                     },
-    //                     ...documentSnapshot.data()
-    //                 };
-    //             });
-
-    //             setThreads(threads);
-
-    //             if (loading) {
-    //                 setLoading(false);
-    //             }
-    //         });
-
-    //     /**
-    //      * unsubscribe listener
-    //      */
-    //     return () => unsubscribe();
-    // }, []);
-
-    // if (loading) {
-    //     return <Loading />;
-    // }
-
     return (
         <View style={styles.container}>
-
+            <Text></Text>
         </View>
     );
 }

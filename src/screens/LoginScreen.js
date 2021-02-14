@@ -16,10 +16,6 @@ export default function Login({ navigation }) {
     <Screen style={styles.container}>
       <Image style={styles.logo} source={require("../../assets/glancelogo.png")} />
       <Form>
-        {/* <ErrorMessage
-          error="Invalid email and/or password."
-          visible={loginFailed}
-        /> */}
         <FormInput
           autoCapitalize="none"
           autoCorrect={false}

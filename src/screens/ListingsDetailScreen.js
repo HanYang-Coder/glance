@@ -9,7 +9,7 @@ import useStatsBar from '../utils/useStatusBar';
 function ListingsDetailScreen({ route }) {
 
     const { thread } = route.params;
-    console.log(thread.title)
+    console.log(thread)
 
     return (
         <View>
@@ -17,7 +17,6 @@ function ListingsDetailScreen({ route }) {
             <Text>${thread.price}</Text>
             <Text>Description{"\n"}{thread.description}</Text>
         </View>
-
     );
 }
 

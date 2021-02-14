@@ -25,8 +25,6 @@ export default function AddRoomScreen({ navigation }) {
                     price: price,
                     time: time,
                     createdAt: new Date().getTime(),
-                    //createdBy: createdBy,
-
                     cat: category,
                     description: description,
                     aftersale: aftersale

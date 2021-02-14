@@ -27,10 +27,6 @@ function ChatApp() {
                 }
             }}
         >
-            {/* <ChatAppStack.Screen
-                name="Listings"
-                component={ListingsScreen}
-            /> */}
             <ChatAppStack.Screen
                 name="Listings"
                 component={ListingsScreen}

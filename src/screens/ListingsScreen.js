@@ -38,7 +38,6 @@ function ListingsScreen({ navigation }) {
 
                 })
                 setThreads(jobs)
-                console.log(jobs)
                 if (loading) {
                     setLoading(false)
                 }
